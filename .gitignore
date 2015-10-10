@@ -1,0 +1,6 @@
+/application/config/database.php
+/applicationadmin/config/database.php
+/*.buildpath
+.buildpath
+/*.project
+/sh.exe.stackdump

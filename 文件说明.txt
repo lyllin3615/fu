@@ -1,0 +1,2 @@
+前台：app/application
+后台：adminapp/applicationadmin

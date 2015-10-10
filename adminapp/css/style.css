@@ -1,0 +1,23 @@
+*{margin:0;padding:0;}
+body{font-size:12px; font-family:'宋体','黑体',Verdana, Geneva, sans-serif;background:#fff;color:#333;}
+img{border:none;}
+a{text-decoration:none;color:#444;}
+a:visited{text-decoration:none;}
+a:hover{text-decoration:underline;}
+ul,li{list-style:none;padding:0px;}
+h1,h2,h3,h4,h5,h6,p{margin:0;}
+input,select{border:1px solid #333;}
+.loginBox{width:600px;margin:10px auto;padding:10px auto;}
+.clearBoth{clear:both;padding:0;margin:0;}
+
+.adminTop{padding-top:10px;padding-left:10px;border:1px solid #aaa;line-height:30px;}
+.adminMenu{border-right:1px solid #888;padding:10px;font-size:12px;line-height:20px;}
+.menuList li h3{font-size:14px;font-weight:bold;}
+.defaultInfos{padding:10px;}
+.divInfos1{margin-top:10px;line-height:22px;}
+.headerLineBackground{background:#BBDDE5;}
+
+.roomOpen{padding:15px; line-height:24px;}
+.roomOpen label{font-weight:bold;}
+.roomOpen h3{background:#BBDDE5;}
+.roomList{padding:15px; line-height:24px;}
