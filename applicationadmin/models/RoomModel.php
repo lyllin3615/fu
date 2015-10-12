@@ -97,5 +97,30 @@ class RoomModel extends CI_Model
 		$this->db->query($sql);
 	}
 	
+	/**
+	 * @deprecated 房间牌位列表
+	 * @param int $roomId 房间号码
+	 * @param int $roomId 房间号
+	 * @param int $page 当前页
+	 */
+	function roomInfos($roomId,$page,$pageSize)
+	{
+	    $start = ($page-1) * $pageSize;
+	    $sql = "select * from fu_location_list where location_room_id = " . $roomId . " limit " . $start . "," . $pageSize;
+	    $res = $this->db->query($sql);
+	    return $res->result_array();	    
+	}
+	
+	/**
+	 * @deprecated 对应的房间牌位总数
+	 * @param int $pageSize 每页大小
+	 */
+	function locationNumber($roomId)
+	{
+	    $sql = "select count(*) as total from fu_location_list where location_room_id = " . $roomId;
+	    $res = $this->db->query($sql);
+	    return $res->row_array();
+	}
+	
 	
 }
