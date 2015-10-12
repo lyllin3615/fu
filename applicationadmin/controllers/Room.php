@@ -52,15 +52,26 @@ class Room extends CI_Controller {
 		{
 			header("Location:/Index/index");
 		}
-		$roomId = $this->RoomModel->RoomOpenAdd($userId,$roomNumber,$openFlag,$datetime);
+		$roomId = $this->RoomModel->roomOpenAdd($userId,$roomNumber,$openFlag,$datetime);
+		//增加牌位
+		$this->RoomModel->roomOpenPosition($roomId,$roomNumber);
 		$this->load->view('success');
 	}
 	
+	/**
+	 * 房间列表
+	 */
 	function roomList()
 	{
 		// 总房间数
 		$roomTotal = $this->RoomModel->roomTotal();
-		$totalPage = ceil($roomTotal/20);
+		if(!$roomTotal)
+		{
+			echo '暂时没有相关房间,请先开设房间';
+			echo "<a href='/Room/roomOpen'>点击开设房间</a>";
+			exit;
+		}
+		$totalPage = ceil($roomTotal/PAGESIZE);
 		$page = $this->input->post_get('page');
 		if(!$page)
 		{
@@ -75,10 +86,35 @@ class Room extends CI_Controller {
 		if($roomList)
 		{
 			$view['roomList'] = $roomList;
-			$view['page'] = $page;
+			if($page > 1)
+			{
+				$view['indexPage'] = 1;
+			}
+			if($page < $totalPage)
+			{
+				$view['endPage'] = $totalPage;
+			}	
+			$view['page'] = $page;	
 			$view['totalPage'] = $totalPage;
+			$view['roomTotal'] = $roomTotal;
 		}
+
 		$this->load->view('roomList', $view);
+	}
+	
+	/**
+	 * 删除房间及牌位
+	 */
+	function delRoom()
+	{
+		$roomId = intval($this->input->post_get('roomId'));
+		$delResult = $this->RoomModel->delRoom($roomId);
+		if($delResult)
+		{
+			$this->load->view('success');
+		}else {
+			$this->load->view('failure');
+		}
 	}
 
 }

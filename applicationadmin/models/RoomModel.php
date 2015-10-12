@@ -24,7 +24,7 @@ class RoomModel extends CI_Model
 	 * @param int $flag 是否开放房间，1开放,0-不开放
 	 * @param int $datetime 设置房间时间
 	 */
-	function RoomOpenAdd($userId,$number,$flag,$datetime)
+	function roomOpenAdd($userId,$number,$flag,$datetime)
 	{
 		$sql = "insert into fu_room_list(room_number,room_flag,user_id,room_time) values
 				(".$number.", ".$flag.", ".$userId.", ".$datetime.")";
@@ -52,10 +52,48 @@ class RoomModel extends CI_Model
 	 */
 	function roomList($page)
 	{
-		$startNumber = ($page - 1) * 20;
-		$sql = "select * from fu_room_list order by room_flag desc,room_id desc limit " . $startNumber . ", 20";
+		$startNumber = ($page - 1) * PAGESIZE;
+		$sql = "select * from fu_room_list order by room_flag desc,room_id desc limit " . $startNumber . ", " . PAGESIZE;
 		$res = $this->db->query($sql);
 		return $res->result_array();
+	}
+	
+	/**
+	 * @deprecated 删除房间及牌位
+	 * @param int $roomId 房间位
+	 */
+	function delRoom($roomId)
+	{
+		$this->db->trans_start();
+		$sqlDel = "delete from fu_room_list where room_id = " . $roomId;
+		$sqlDelPos = "delete from fu_location_list where location_room_id = " . $roomId;
+		$this->db->query($sqlDel);
+		$this->db->query($sqlDelPos);
+		$this->db->trans_complete();
+		// 操作失败
+		if ($this->db->trans_status() === FALSE)
+		{
+			return '';
+		}
+		return 1;
+	}
+	
+	/**
+	 * @deprecated 牌位开设
+	 * @param int $roomId 房间号
+	 * @param int $roomNumber 牌位数
+	 */
+	function roomOpenPosition($roomId,$roomNumber)
+	{
+		$roomNum = '';
+		$sql = "insert into fu_location_list(location_room_id) values ";
+		for($i=0; $i<$roomNumber; $i++)
+		{
+			$roomNum .= "(" .$roomId . "),";
+		}
+		$roomNum = substr($roomNum,0,-1);
+		$sql .= $roomNum;
+		$this->db->query($sql);
 	}
 	
 	

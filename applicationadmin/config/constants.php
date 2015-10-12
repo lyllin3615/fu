@@ -91,3 +91,5 @@ define('COOKIE_NAME', 'ci_com');
 define('COOKIE_PATH', '/');
 define('COOKIE_USER', 'abcefefpp0000asfsd');
 define('COOKIE_PASSWORD', 'lsdfhsduwerwqfsdf00oo');
+
+define('PAGESIZE', 2);

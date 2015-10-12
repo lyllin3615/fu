@@ -21,3 +21,6 @@ input,select{border:1px solid #333;}
 .roomOpen label{font-weight:bold;}
 .roomOpen h3{background:#BBDDE5;}
 .roomList{padding:15px; line-height:24px;}
+.roomListInfos th{background:#ccc;line-height:28px;}
+.listRoomColumns{background:#ccc;}
+.roomListPage{width:100%;text-align:center;padding-top:20px;}
