@@ -22,6 +22,11 @@
 		<td width="20%" align="right"><label>牌位数：</label></td>
 		<td><input type="number" name="number" value="" /></td>
 	</tr>
+	
+	<tr>
+		<td width="20%" align="right"><label>统一定位价：</label></td>
+		<td><input type="number" name="price" value="" /></td>
+	</tr>	
 
 	<tr>
 		<td width="20%" align="right"><label>是否开放：</label></td>
