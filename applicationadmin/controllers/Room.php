@@ -117,5 +117,41 @@ class Room extends CI_Controller {
 			$this->load->view('failure');
 		}
 	}
-
+    /**
+     * 房间对应的牌位列表
+     */
+	function roomInfos()
+	{
+	    $roomId = intval($this->input->post_get('roomId'));
+	    $total = $this->RoomModel->locationNumber($roomId);    
+	    if(!$total['total'])
+	    {
+	      exit('暂无相关数据!');  
+	    }
+	    
+	    $totalPage = ceil($total['total']/PAGESIZE);
+	    $page = $this->input->post_get('page');
+	    if(!$page)
+	    {
+	        $page = 1;
+	    }elseif($page > $totalPage)
+	    {
+	        $page = $totalPage;
+	    }
+	    if($page > 1)
+	    {
+	        $view['indexPage'] = 1;
+	    }
+	    if($page < $totalPage)
+	    {
+	        $view['endPage'] = $totalPage;
+	    }
+	    $view['page'] = $page;
+	    $view['totalPage'] = $totalPage;
+	    $view['total'] = $total['total'];
+	    $result = $this->RoomModel->roomInfos($roomId,$page,PAGESIZE);
+	    $view['list'] = $result;
+	    print_r($view); exit;
+	    $this->load->view('roomInfos', $view);
+	}   
 }
