@@ -82,14 +82,15 @@ class RoomModel extends CI_Model
 	 * @deprecated 牌位开设
 	 * @param int $roomId 房间号
 	 * @param int $roomNumber 牌位数
+	 * @param float $price 价格
 	 */
-	function roomOpenPosition($roomId,$roomNumber)
+	function roomOpenPosition($roomId,$roomNumber,$price)
 	{
 		$roomNum = '';
-		$sql = "insert into fu_location_list(location_room_id) values ";
+		$sql = "insert into fu_location_list(location_room_id,location_price) values ";
 		for($i=0; $i<$roomNumber; $i++)
 		{
-			$roomNum .= "(" .$roomId . "),";
+			$roomNum .= "(" .$roomId . ",".$price."),";
 		}
 		$roomNum = substr($roomNum,0,-1);
 		$sql .= $roomNum;
