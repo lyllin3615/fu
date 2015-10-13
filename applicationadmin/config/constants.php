@@ -93,3 +93,6 @@ define('COOKIE_USER', 'abcefefpp0000asfsd');
 define('COOKIE_PASSWORD', 'lsdfhsduwerwqfsdf00oo');
 
 define('PAGESIZE', 2);
+
+// 前台域名
+define('FRONT_DOMAIN', 'http://www.ci.com'); 
