@@ -19,7 +19,7 @@
 	<tr>
 		<td width="20%" align="right">牌位价格：</td>
 		<td>
-		<input type="number" name="location_price" value="<?php echo $result['location_price'];?>" />
+		<input type="text" name="location_price" value="<?php echo $result['location_price'];?>" />
 		</td>		
 	</tr>
 	
