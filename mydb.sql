@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50173
 File Encoding         : 65001
 
-Date: 2015-10-12 18:07:39
+Date: 2015-10-13 08:09:36
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -113,6 +113,7 @@ CREATE TABLE `fu_location_list` (
   `location_type` tinyint(1) DEFAULT '0' COMMENT '牌位类型 0-随机,1-高端定制式',
   `location_number` tinyint(1) DEFAULT '2' COMMENT '出售状态，2-末出售，1－出售中，0－已出售',
   `location_date` int(11) DEFAULT NULL COMMENT '牌位有效时间',
+  `location_alias` varchar(255) DEFAULT NULL COMMENT '牌位别名',
   PRIMARY KEY (`localtion_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -132,6 +133,8 @@ CREATE TABLE `fu_room_list` (
   `room_time` int(11) DEFAULT '0' COMMENT '开房间的时间',
   `room_full` tinyint(1) DEFAULT '0' COMMENT '该房间是否已售完,0-末售完，1－已售完',
   `location_list_localtion_id` int(10) unsigned NOT NULL,
+  `room_alias` varchar(255) DEFAULT NULL COMMENT '房间别名',
+  `room_description` varchar(255) DEFAULT NULL COMMENT '房间描述',
   PRIMARY KEY (`room_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
