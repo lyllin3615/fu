@@ -221,5 +221,15 @@ class Room_model extends CI_Model
 		return $this->db->affected_rows();
 	}
 	
+	/**
+	 * 获取房间号
+	 */
+	function roomPosList()
+	{
+	    $sql = "select room_id from fu_room_list";
+	    $res = $this->db->query($sql);
+	    return $res->result_array();
+	}
+	
 	
 }
