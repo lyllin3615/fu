@@ -331,5 +331,39 @@ class Room extends CI_Controller {
 		}
 	}
 	
+	/**
+	 * 房间牌位信息查询
+	 */
+	function roomPosList()
+	{
+	    $view = array();
+	    $param = array();
+	    $roomList = $this->Room_model->roomPosList();
+	    $view['roomList'] = $roomList;
+	    // 房间号 
+	    $room_id = $this->input->get_post('roomId');
+	    $view['room_id'] = $room_id;
+	    if($room_id != 'all')
+	    {
+	        $param['location_room_id'] = $room_id;
+	    }
+	    // 牌位类型
+	    $positionType = $this->input->get_post('positionType');
+	    $view['type'] = $positionType;
+	    if($positionType != 'all')
+	    {
+	        
+	    }
+	    // 出售状态
+	    $status = $this->input->get_post('status');
+	    $view['status'] = $status;
+	    if($status != 'all')
+	    {
+	        
+	    }
+	    
+	    $this->load->view('roomPosList',$view);
+	}
+	
 	
 }
