@@ -48,12 +48,14 @@ class Room extends CI_Controller {
 		$roomNumber = intval($this->input->post_get('number'));
 		$openFlag = intval($this->input->post_get('openFlag'));
 		$price = $this->input->post_get('price');
+		$alias = $this->input->post_get('alias');
+		$description = $this->input->post_get('description');
 		$datetime = time();
 		if($roomNumber <= 0 || $openFlag < 0)
 		{
 			header("Location:/Index/index");
 		}
-		$roomId = $this->RoomModel->roomOpenAdd($userId,$roomNumber,$openFlag,$datetime);
+		$roomId = $this->RoomModel->roomOpenAdd($userId,$roomNumber,$openFlag,$datetime,$alias,$description);
 		//增加牌位
 		$this->RoomModel->roomOpenPosition($roomId,$roomNumber,$price);
 		$this->load->view('success');
