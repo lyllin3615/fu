@@ -17,6 +17,7 @@
 			<li><a href="/Room/roomList" target="mainFrame">房间列表</a></li>
 			<li><a href="/Room/roomOpen" target="mainFrame">房间开设</a></li>
 			<li><a href="/Room/roomOpenPosition" target="mainFrame">房间牌位设置</a></li>
+			<li><a href="/Room/roomPosList" target="mainFrame">房间牌位查询</a></li>
 		</ul>
 	</li>
 
