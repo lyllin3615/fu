@@ -23,11 +23,13 @@ class RoomModel extends CI_Model
 	 * @param int $number 房间数
 	 * @param int $flag 是否开放房间，1开放,0-不开放
 	 * @param int $datetime 设置房间时间
+	 * @param int $alias 设置房间别名
+	 * @param int $description 设置房间描述
 	 */
-	function roomOpenAdd($userId,$number,$flag,$datetime)
+	function roomOpenAdd($userId,$number,$flag,$datetime,$alias,$description)
 	{
-		$sql = "insert into fu_room_list(room_number,room_flag,user_id,room_time) values
-				(".$number.", ".$flag.", ".$userId.", ".$datetime.")";
+		$sql = "insert into fu_room_list(room_number,room_flag,user_id,room_time,room_alias,room_description) values
+				(".$number.", ".$flag.", ".$userId.", ".$datetime.",'".$alias."', '".$description."')";
 		$this->db->query($sql);
 		return $this->roomMax();
 	}
