@@ -54,3 +54,48 @@ function authcode($string, $operation = 'DECODE', $key = 'lin3615?', $expiry = 0
 					return $keyc.str_replace('=', '', base64_encode($result));
 			}
 	}
+	
+	// 单文件上传
+	function fileUpload($filename)
+	{
+		$fileName = '';
+		$arr = array('.jpg','.jpeg','.png','.gif','.bmp');
+		if($filename['name'])
+		{
+			if(is_uploaded_file($filename['tmp_name'])){
+				if($filename['error'] == 0){
+					$picname_ext = stristr($filename['name'], '.');
+					if(!in_array(strtolower($picname_ext), $arr))
+					{
+						exit('文件只能上传格式为jpg,jpeg,png,.gif,bmp');
+					}
+					$picname = '../app/images/' . date('YmdHis', time()) . '_' . rand(0,99999) . $picname_ext;
+					if(!move_uploaded_file($filename['tmp_name'], $picname)){
+						echo '上传失败，不能转移文件到相应的文件';
+						exit;
+					}
+					$fileName = $picname;
+				}else if($filename['error'] == 1){
+					echo '上传文件超过php.ini中的最大大小'; exit;
+				}else if($filename['error'] == 2){
+					echo '上传文件大小超过 html表单中的大小'; exit;
+				}else if($filename['error'] == 3){
+					echo '文件只有部分上传';exit;
+				}else if($filename['error'] == 4){
+					echo '没有文件被上传';exit;
+				}else if($filename['error'] == 6){
+					echo '找不到临时文件夹';exit;
+				}else{
+					echo '文件写入失败!';exit;
+				}
+			}
+		}
+		return substr($fileName, 7);
+	}
+
+	if(!function_exists('mb_substr'))
+	{
+		function mb_substr($str , $start , $length = NULL){
+			return substr($str , $start , $length);	
+		}
+	}
