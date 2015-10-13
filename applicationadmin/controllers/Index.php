@@ -34,8 +34,8 @@ class Index extends CI_Controller {
 		{
 			$username = authcode($cookieUsername);
 			$password = authcode($cookiePassword);
-			$this->load->model('LoginModel');
-			$res = $this->LoginModel->loginCheck($username, $password);
+			$this->load->model('Login_model');
+			$res = $this->Login_model->loginCheck($username, $password);
 			if($res)
 			{
 		        // 设置session等
@@ -75,8 +75,8 @@ class Index extends CI_Controller {
         {
             header("Location:/Index/login");
         }
-        $this->load->model('LoginModel');
-        $res = $this->LoginModel->loginCheck($username, $password);
+        $this->load->model('Login_model');
+        $res = $this->Login_model->loginCheck($username, $password);
         if(!$res)
         {
             header("Location:/Index/login");
@@ -111,8 +111,8 @@ class Index extends CI_Controller {
     	// 退出日志
     	if($this->session->userId)
     	{
-    		$this->load->model('LoginModel');
-    		$this->LoginModel->logLogout($this->session->admin_user, addslashes(serialize($_SERVER)), time());    		
+    		$this->load->model('Login_model');
+    		$this->Login_model->logLogout($this->session->admin_user, addslashes(serialize($_SERVER)), time());    		
     	}
     	$arr = array('userId','admin_user', 'role');
     	$this->session->unset_userdata($arr);

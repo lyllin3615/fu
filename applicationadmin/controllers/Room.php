@@ -5,7 +5,7 @@ class Room extends CI_Controller {
 	function __construct()
 	{
 		parent::__construct();
-		$this->load->model('RoomModel');
+		$this->load->model('Room_model');
 		$this->isLogin();
 	}
 	
@@ -28,7 +28,7 @@ class Room extends CI_Controller {
 	{
 		$view = array();
 		// 获取房间号码
-		$roomId = $this->RoomModel->roomMax();
+		$roomId = $this->Room_model->roomMax();
 		if(!$roomId)
 		{
 			$roomId = 1;
@@ -55,9 +55,9 @@ class Room extends CI_Controller {
 		{
 			header("Location:/Index/index");
 		}
-		$roomId = $this->RoomModel->roomOpenAdd($userId,$roomNumber,$openFlag,$datetime,$alias,$description);
+		$roomId = $this->Room_model->roomOpenAdd($userId,$roomNumber,$openFlag,$datetime,$alias,$description);
 		//增加牌位
-		$this->RoomModel->roomOpenPosition($roomId,$roomNumber,$price);
+		$this->Room_model->roomOpenPosition($roomId,$roomNumber,$price);
 		$this->load->view('success');
 	}
 	
@@ -67,7 +67,7 @@ class Room extends CI_Controller {
 	function roomList()
 	{
 		// 总房间数
-		$roomTotal = $this->RoomModel->roomTotal();
+		$roomTotal = $this->Room_model->roomTotal();
 		if(!$roomTotal)
 		{
 			echo '暂时没有相关房间,请先开设房间';
@@ -85,7 +85,7 @@ class Room extends CI_Controller {
 		}
 		
 		$view['roomList'] = array();
-		$roomList = $this->RoomModel->roomList($page);
+		$roomList = $this->Room_model->roomList($page);
 		if($roomList)
 		{
 			$view['roomList'] = $roomList;
@@ -110,7 +110,7 @@ class Room extends CI_Controller {
 	function delRoom()
 	{
 		$roomId = intval($this->input->post_get('roomId'));
-		$delResult = $this->RoomModel->delRoom($roomId);
+		$delResult = $this->Room_model->delRoom($roomId);
 		if($delResult)
 		{
 			$this->load->view('success');
@@ -124,13 +124,13 @@ class Room extends CI_Controller {
 	function roomInfos()
 	{
 	    $roomId = intval($this->input->post_get('roomId'));
-	    $result = $this->RoomModel->roomInfos($roomId);
+	    $result = $this->Room_model->roomInfos($roomId);
 	    if(!$result)
 	    {
 	    	exit('出错了，暂时没有相关数据！');
 	    }
 	    $view['roomInfos'] = $result;
-	    $adminInfos = $this->RoomModel->adminUser($result['user_id']);
+	    $adminInfos = $this->Room_model->adminUser($result['user_id']);
 	    $view['userInfos'] = $adminInfos;
 	    $this->load->view('roomInfos', $view);
 	}  
@@ -141,7 +141,7 @@ class Room extends CI_Controller {
 	function updateRoom()
 	{
 		$roomId = intval($this->input->post_get('roomId'));
-		$result = $this->RoomModel->roomInfos($roomId);
+		$result = $this->Room_model->roomInfos($roomId);
 		if(!$result)
 		{
 			exit('出错了，暂时没有相关数据！');
@@ -163,7 +163,7 @@ class Room extends CI_Controller {
 		}
 		$room_alias = addslashes($this->input->post_get('room_alias'));
 		$room_description = addslashes($this->input->post_get('room_description'));
-		$result = $this->RoomModel->updateRoomDeal($roomId,$room_alias,$room_description,$room_flag);
+		$result = $this->Room_model->updateRoomDeal($roomId,$room_alias,$room_description,$room_flag);
 		if($result)
 		{
 			$this->load->view('success');
@@ -175,7 +175,7 @@ class Room extends CI_Controller {
 	function roomOpenPosition()
 	{
 		// 总房间数
-		$roomTotal = $this->RoomModel->roomTotal();
+		$roomTotal = $this->Room_model->roomTotal();
 		if(!$roomTotal)
 		{
 			echo '暂时没有相关房间,请先开设房间';
@@ -193,7 +193,7 @@ class Room extends CI_Controller {
 		}
 		
 		$view['roomList'] = array();
-		$roomList = $this->RoomModel->roomList($page);
+		$roomList = $this->Room_model->roomList($page);
 		if($roomList)
 		{
 			$view['roomList'] = $roomList;
@@ -218,7 +218,7 @@ class Room extends CI_Controller {
 	function postionList()
 	{
 		$roomId = intval($this->input->post_get('id'));
-		$total = $this->RoomModel->posTotal($roomId);	
+		$total = $this->Room_model->posTotal($roomId);	
 		if(!$total)
 		{
 			echo '该房间暂时没有牌位，请删除该房间，然后';
@@ -247,7 +247,7 @@ class Room extends CI_Controller {
 		$view['totalPage'] = $totalPage;
 		$view['total'] = $total;
 		$view['roomId'] = $roomId;
-		$posList = $this->RoomModel->posList($roomId,$page,PAGESIZE);	
+		$posList = $this->Room_model->posList($roomId,$page,PAGESIZE);	
 		$view['result'] = $posList;
 		$this->load->view('postionList', $view);
 	}
@@ -265,7 +265,7 @@ class Room extends CI_Controller {
 			exit;		
 		}
 		$locationId = intval($locationId);
-		$result = $this->RoomModel->posLocation($locationId);
+		$result = $this->Room_model->posLocation($locationId);
 		if(!$result)
 		{
 			echo '没有相关数据！';
@@ -301,7 +301,7 @@ class Room extends CI_Controller {
 		{
 			$filePic = fileUpload($_FILES['location_pic_new']);
 		}
-		$result = $this->RoomModel->posLocationDeal($localtion_id,$location_price,$location_type,$location_alias,$location_details,$filePic);
+		$result = $this->Room_model->posLocationDeal($localtion_id,$location_price,$location_type,$location_alias,$location_details,$filePic);
 		if($result)
 		{
 			$this->load->view('success');
@@ -322,7 +322,7 @@ class Room extends CI_Controller {
 			echo "<a href=\"javascript:history.go(-1);\">点击返回</a>";
 			exit;
 		}
-		$result = $this->RoomModel->delPos($localtion_id);
+		$result = $this->Room_model->delPos($localtion_id);
 		if($result)
 		{
 			$this->load->view('success');
