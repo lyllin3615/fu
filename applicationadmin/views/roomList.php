@@ -11,6 +11,7 @@
 </head>
 <body class="roomList">
 <div class="roomListInfos">
+<h2 class="headerLineBackground">房间 列表 信息</h2>
 <?php
 if(!$roomList) { ?>
 	暂时无相关房间，<a href="/Room/roomOpen">点击增加房间</a>
