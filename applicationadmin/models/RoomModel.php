@@ -48,6 +48,36 @@ class RoomModel extends CI_Model
 		$rowResult = $result->row();
 		return $rowResult->total;
 	}
+	
+	/**
+	 * @deprecated 对应的房间牌位数目
+	 * @param int $roomId 房间号
+	 */
+	function posTotal($roomId)
+	{
+		$sql = "select count(*) as total from fu_location_list where location_room_id=".$roomId;
+		$result = $this->db->query($sql);
+		if($result->num_rows() <= 0)
+		{
+			return '';
+		}
+		$rowResult = $result->row();
+		return $rowResult->total;		
+	}
+	
+	/**
+	 * @deprecated 牌位列表
+	 * @param int $roomId 房间号
+	 * @param int $page 页码
+	 * @param int $pageSize 每页大小
+	 */
+	function posList($roomId,$page,$pageSize)
+	{
+		$sql = "select * from fu_location_list where location_room_id = " . $roomId . " limit " .
+				($page-1) * $pageSize . "," . $pageSize;
+		$result = $this->db->query($sql);
+		return $result->result_array();
+	}
 	/**
 	 * @param int $page 页码数
 	 * 房间列表
@@ -100,17 +130,14 @@ class RoomModel extends CI_Model
 	}
 	
 	/**
-	 * @deprecated 房间牌位列表
+	 * @deprecated 房间相关信息
 	 * @param int $roomId 房间号码
-	 * @param int $roomId 房间号
-	 * @param int $page 当前页
 	 */
-	function roomInfos($roomId,$page,$pageSize)
+	function roomInfos($roomId)
 	{
-	    $start = ($page-1) * $pageSize;
-	    $sql = "select * from fu_location_list where location_room_id = " . $roomId . " limit " . $start . "," . $pageSize;
+	    $sql = "select * from fu_room_list where room_id = " . $roomId;
 	    $res = $this->db->query($sql);
-	    return $res->result_array();	    
+	    return $res->row_array();	    
 	}
 	
 	/**
@@ -122,6 +149,76 @@ class RoomModel extends CI_Model
 	    $sql = "select count(*) as total from fu_location_list where location_room_id = " . $roomId;
 	    $res = $this->db->query($sql);
 	    return $res->row_array();
+	}
+	
+	/**
+	 * @deprecated 查询相关管理员
+	 * @param int $userId 用户ID
+	 */
+	function adminUser($userId)
+	{
+		$sql = "select * from fu_admin where admin_id =" . $userId;
+		$res = $this->db->query($sql);
+		return $res->row_array();
+	}
+	
+	/**
+	 * @deprecated 修改房间信息
+	 * @param int $roomId 房间id
+	 * @param string $room_alias 房间别名
+	 * @param string $room_description 房间描述
+	 * @param int $room_flag 是否开启
+	 */
+	function updateRoomDeal($roomId,$room_alias,$room_description,$room_flag)
+	{
+		$sql = "update fu_room_list set room_alias = '".$room_alias."', room_description = '".$room_description."',
+				room_flag = " . $room_flag . " where room_id = " . $roomId;
+		$this->db->query($sql);
+		return $this->db->affected_rows();
+	}
+	
+	/**
+	 * @deprecated 牌位查询
+	 * @param int $locationId 牌位号码
+	 */
+	function posLocation($locationId)
+	{
+		$sql = "select * from fu_location_list where localtion_id = " . $locationId;
+		$res = $this->db->query($sql);
+		return $res->row_array();
+	}
+	
+	/**
+	 * @deprecated 牌位设置
+	 * @param int $localtion_id 牌位
+	 * @param float $location_price 价格
+	 * @param int $location_type 类型
+	 * @param string $location_alias 名称
+	 * @param string $location_details 描述
+	 * @param string $filePic 图片名
+	 */
+	function posLocationDeal($localtion_id,$location_price,$location_type,$location_alias,$location_details,$filePic)
+	{
+		$sql = "update fu_location_list set location_price = " . $location_price .",location_type = " . $location_type .
+		",location_alias = '" . $location_alias . "',location_details = '".$location_details."'";
+		if($filePic)
+		{
+			$sql .= ",location_pic = '".$filePic."'";
+		}
+		$sql .= " where localtion_id = " . $localtion_id;
+		$this->db->query($sql);
+		return $this->db->affected_rows();
+	}
+	
+	/**
+	 * @deprecated 删除牌位
+	 * @param int $locationId 牌位
+	 */
+	function delPos($locationId)
+	{
+		$sql = "delete from fu_location_list where localtion_id = " . $locationId;
+		$this->db->query($sql);
+		return $this->db->affected_rows();
 	}
 	
 	
