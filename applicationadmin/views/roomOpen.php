@@ -37,6 +37,16 @@
 		</select>
 		</td>
 	</tr>
+
+	<tr>
+		<td width="20%" align="right"><label>房间别名：</label></td>
+		<td><input type="text" name="alias" value="" /></td>
+	</tr>
+
+	<tr>
+		<td width="20%" align="right"><label>房间描述：</label></td>
+		<td><textarea rows="5" cols="60" name="description"></textarea></td>
+	</tr>
 	<tr>
 		<td width="20%" align="right">&nbsp;</td>
 		<td>
