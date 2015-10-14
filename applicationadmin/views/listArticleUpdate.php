@@ -122,7 +122,7 @@
 </tr>
 <tr>
 	<td width="15%" align="right">&nbsp;</td>
-	<td>&nbsp;&nbsp;<a href="/" target="_top">放弃返回</a>&nbsp;&nbsp;<input type="submit" name="submit" value="submit" /></td>
+	<td>&nbsp;&nbsp;<a href="/" target="_top">放弃返回</a>&nbsp;&nbsp;<input type="submit" name="submit" value="提交" /></td>
 </tr>
 </table>
 
