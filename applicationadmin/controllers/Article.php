@@ -149,5 +149,66 @@ class Article extends CI_Controller {
 	    $this->load->view('listArticleDetails',$view);
 	}
 	
+	/**
+	 * 文章编辑
+	 */
+	function listArticleUpdate()
+	{
+	    $id = $this->input->get_post('id');
+		if(!$id)
+	    {
+	        echo '没有相关数据！';
+	        echo "&nbsp;<a href=\"javascript:history.go(-1);\">点击返回</a>";
+	        exit;
+	    }
+	    $id = intval($id);
+	    $res = $this->Article_model->listArticleDetails($id);
+	    if(!$res)
+	    {
+	        echo '没有相关数据！';
+	        echo "&nbsp;<a href=\"javascript:history.go(-1);\">点击返回</a>";
+	        exit;
+	    }
+	    $view['result'] = $res;
+	    $this->load->view('listArticleUpdate',$view);
+	}
+	
+	/**
+	 * 文章编辑处理
+	 */
+	function updateArticleDeal()
+	{
+	    $id = $this->input->get_post('article_id');
+	    if(!$id)
+	    {
+	        echo '没有相关数据！';
+	        echo "&nbsp;<a href=\"javascript:history.go(-1);\">点击返回</a>";
+	        exit;
+	    }	
+	    $id = intval($id);
+	    // 标题
+	    $article_title = $this->input->post_get('article_title');
+	    // 内容
+	    $content = $this->input->post_get('content');
+	    if(!$article_title || !$content)
+	    {
+	        $this->load->view('failure');
+	        exit;
+	    }
+	    $article_title = addslashes($article_title);
+	    $content = addslashes($content);
+	    $article_flag = intval($this->input->post_get('article_flag'));
+	    $article_headline = addslashes($this->input->post_get('article_headline'));
+	    $article_keywords = addslashes($this->input->post_get('article_keywords'));
+	    $article_description = addslashes($this->input->post_get('article_description'));
+	    $res = $this->Article_model->updateArticleDeal($id,$article_title,$article_flag,$article_headline,$article_keywords,$article_description,$content);
+	    if($res)
+	    {
+	        $this->load->view('success');
+	    }else {
+	        $this->load->view('failure');
+	    }	    
+	}
+	
 
 }
