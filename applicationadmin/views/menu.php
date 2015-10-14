@@ -25,9 +25,7 @@
 	<li>
 		<h2>文章管理中心</h2>
 		<ul>
-			<?php for($i=0; $i < 3; $i++) { ?>
-			<li><a href="">***********</a></li>
-			<?php } ?>
+			<li><a href="/Article/addArticle" target="mainFrame">发表文章</a></li>
 		</ul>
 	</li>
 

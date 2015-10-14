@@ -48,8 +48,8 @@ class Room extends CI_Controller {
 		$roomNumber = intval($this->input->post_get('number'));
 		$openFlag = intval($this->input->post_get('openFlag'));
 		$price = $this->input->post_get('price');
-		$alias = $this->input->post_get('alias');
-		$description = $this->input->post_get('description');
+		$alias = addslashes($this->input->post_get('alias'));
+		$description = addslashes($this->input->post_get('description'));
 		$datetime = time();
 		if($roomNumber <= 0 || $openFlag < 0)
 		{
@@ -292,8 +292,8 @@ class Room extends CI_Controller {
 		}
 		$location_price = $this->input->post_get('location_price');
 		$location_type = $this->input->post_get('location_type');
-		$location_alias = $this->input->post_get('location_alias');
-		$location_details = $this->input->post_get('location_details');
+		$location_alias = addslashes($this->input->post_get('location_alias'));
+		$location_details = addslashes($this->input->post_get('location_details'));
 	
 		// 上传图片
 		$filePic = '';

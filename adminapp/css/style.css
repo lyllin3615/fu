@@ -26,4 +26,6 @@ input,select{border:1px solid #333;}
 .listRoomColumns{background:#BBDDE5;}
 .roomListPage{width:100%;text-align:center;padding-top:20px;}
 .roomInfosDiv{padding-left:5%; }
-.searchListPos{line-height:26px;} 
+.searchListPos{line-height:26px;}
+
+.article_title{width:250px;}
