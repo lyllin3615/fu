@@ -59,5 +59,29 @@ class Article extends CI_Controller {
 			$this->load->view('failure');
 		}
 	}
+	
+	/**
+	 * 文章列表
+	 */
+	function listArticle()
+	{
+		$total = $this->Article_model->listArticleTotal();
+		if(!$total)
+		{
+			echo '没有相关数据！';
+			echo "&nbsp;<a href=\"javascript:history.go(-1);\">点击返回</a>";
+			exit;			
+		}
+		$page = $this->input->get_post('page');
+		if(!$page)
+		{
+			$page = 1;
+		}else {
+			$page = intval($page);
+		}
+		$totalPage = ceil($total/PAGESIZE);
+		$result = $this->Article_model->listArticle($page,PAGESIZE);
+		print_r($result);
+	}
 
 }
