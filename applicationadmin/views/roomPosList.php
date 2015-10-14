@@ -13,8 +13,8 @@
 <h4>房间牌位查询</h4>
 
 <!-- bof one -->
-<div class="divInfos1">
-<form method="get" action="/Room/roomPosList">
+<div class="divInfos1 searchListPos">
+<form method="get" action="/Room/roomPosListSearch">
 查询房间号:
 <select name="roomId">
 <option value="all" <?php if(!$room_id){echo "selected";}?>>全部</option>
@@ -31,7 +31,7 @@ if(isset($roomList) && $roomList)
 <select name="positionType">
 <option value="all" <?php if($type == 'all'){echo 'selected';}?>>全部</option>
 <option value="1" <?php if($type == 1){echo 'selected';}?>>高端定制</option>
-<option value="0" <?php if(!$type){echo 'selected';}?>>随机/生辰八字</option>
+<option value="2" <?php if($type == 2){echo 'selected';}?>>随机/生辰八字</option>
 </select>
 &nbsp;
 销售状态：
@@ -39,7 +39,7 @@ if(isset($roomList) && $roomList)
 <option value="all" <?php if($status == 'all'){echo 'selected';}?>>全部</option>
 <option value="2" <?php if($status == 2){echo 'selected';}?>>末出售</option>
 <option value="1" <?php if($status == 1){echo 'selected';}?>>出售中</option>
-<option value="0" <?php if(!$status){echo 'selected';}?>>已出售</option>
+<option value="3" <?php if($status == 3){echo 'selected';}?>>已出售</option>
 </select>
 &nbsp;
 <input type="submit" name="submit" value="查询" />
@@ -48,7 +48,8 @@ if(isset($roomList) && $roomList)
 <!-- eof one -->
 
 <!--  bof infos -->
-xxx
+<br />
+请按以上条件查询相关信息
 <!--  eof infos -->
 
 </body>
