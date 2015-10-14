@@ -77,7 +77,9 @@ if (!file_exists($current_path) || !is_dir($current_path)) {
 	echo 'Directory does not exist.';
 	exit;
 }
-$current_path = 'E:\wamp\www\fu\app\images\article/';
+//$current_path = 'E:\wamp\www\fu\app\images\article/';
+//$current_path = 'G:\phpweb\apache2\htdocs\fu\app\images\article/';
+$current_path = realpath("../../../app/images/article/");
 //$current_path = 'http://www.ci.com/images/article/';
 // echo $current_path; exit('-----');
 //遍历目录取得文件信息
