@@ -12,7 +12,7 @@
 <body class="adminMenu">
 <ul class="menuList">
 	<li>
-		<h3>房间/牌位管理</h3>
+		<h3>房间/牌位管理中心</h3>
 		<ul>
 			<li><a href="/Room/roomList" target="mainFrame">房间列表</a></li>
 			<li><a href="/Room/roomOpen" target="mainFrame">房间开设</a></li>
@@ -23,15 +23,31 @@
 
 
 	<li>
-		<h2>0000000</h2>
+		<h2>文章管理中心</h2>
 		<ul>
-			<?php for($i=0; $i < 10; $i++) { ?>
+			<?php for($i=0; $i < 3; $i++) { ?>
 			<li><a href="">***********</a></li>
 			<?php } ?>
 		</ul>
 	</li>
 
-
+	<li>
+		<h2>会员管理中心</h2>
+		<ul>
+			<?php for($i=0; $i < 3; $i++) { ?>
+			<li><a href="">***********</a></li>
+			<?php } ?>
+		</ul>
+	</li>
+	
+	<li>
+		<h2>管理员中心</h2>
+		<ul>
+			<?php for($i=0; $i < 3; $i++) { ?>
+			<li><a href="">***********</a></li>
+			<?php } ?>
+		</ul>
+	</li>	
 
 </ul>
 </body>
