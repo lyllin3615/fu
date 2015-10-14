@@ -86,7 +86,7 @@
 	<?php } ?>	
 	<tr>
 	<td colspan="10" align="center">
-	页码：<?php echo $page;?>/<?php echo $totalPage;?>&nbsp;&nbsp;
+	总记录数：<?php echo $total; ?>&nbsp;&nbsp;页码：<?php echo $page;?>/<?php echo $totalPage;?>&nbsp;&nbsp;
 	<?php if(isset($indexPage) && $indexPage) {?>
 	<a href="/Room/postionList?id=<?php echo $roomId; ?>&page=1">首页</a>&nbsp;<a href="/Room/postionList?id=<?php echo $roomId; ?>&page=<?php echo $page-1;?>">上一页</a>&nbsp;
 	<?php } ?>
