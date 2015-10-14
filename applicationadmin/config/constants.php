@@ -92,7 +92,9 @@ define('COOKIE_PATH', '/');
 define('COOKIE_USER', 'abcefefpp0000asfsd');
 define('COOKIE_PASSWORD', 'lsdfhsduwerwqfsdf00oo');
 
+// 正常分页大小 
 define('PAGESIZE', 2);
-
+// 搜索牌位分页大小 
+define('PAGESIZEPOS',10);
 // 前台域名
 define('FRONT_DOMAIN', 'http://www.ci.com'); 
