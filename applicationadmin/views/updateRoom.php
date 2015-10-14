@@ -11,6 +11,7 @@
 </head>
 <body class="roomList">
 <div class="roomInfosDiv">
+<h2 class="headerLineBackground">房间号:<?php echo $roomInfos['room_id'];?></h2>
 <form action="/Room/updateRoomDeal" method="post">
 <input type="hidden" name="room_id" value="<?php echo $roomInfos['room_id'];?>"  />
 <table border="0" cellpadding="5" cellspacing="5">	
