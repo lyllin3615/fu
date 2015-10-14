@@ -66,4 +66,23 @@ class Article_model extends CI_Model
 	    $res = $this->db->query($sql);	
 	    return $res->row();
 	}
+	
+	/**
+	 * 文章编辑处理
+	 * @param unknown $id 
+	 * @param unknown $article_title
+	 * @param unknown $article_flag
+	 * @param unknown $article_headline
+	 * @param unknown $article_keywords
+	 * @param unknown $article_description
+	 * @param unknown $content
+	 */
+	function updateArticleDeal($id,$article_title,$article_flag,$article_headline,$article_keywords,$article_description,$content)
+	{
+	   $sql = "update fu_article set article_title ='".$article_title."', article_flag = " . $article_flag .
+	           ", article_headline = '".$article_headline."', article_keywords = '".$article_keywords."',
+	             article_description = '" . $article_description . "',article_content = '".$content."' where article_id = " . $id;
+	   $this->db->query($sql);
+	   return $this->db->affected_rows();
+	}
 }
