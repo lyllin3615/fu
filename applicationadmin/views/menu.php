@@ -26,6 +26,7 @@
 		<h2>文章管理中心</h2>
 		<ul>
 			<li><a href="/Article/addArticle" target="mainFrame">发表文章</a></li>
+			<li><a href="/Article/listArticle" target="mainFrame">文章列表</a></li>
 		</ul>
 	</li>
 
