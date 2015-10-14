@@ -34,12 +34,36 @@ class Article_model extends CI_Model
 	    $res = $this->db->query($sql);
 	    return $res->result_array();
 	}
-	
+	/**
+	 * 获取文章总数
+	 */
 	function listArticleTotal()
 	{
 		$sql = "select count(*) as total from fu_article";
 		$result = $this->db->query($sql);
 		$rowResult = $result->row();
 		return $rowResult->total;
+	}
+	
+	/**
+	 * 删除文章
+	 * @param unknown $id
+	 */
+	function listArticleDel($id)
+	{
+	    $sql = "delete from fu_article where article_id = " . $id;
+	    $this->db->query($sql);
+	    return $this->db->affected_rows();
+	}
+	
+	/**
+	 * 查看文章
+	 * @param unknown $id
+	 */
+	function listArticleDetails($id)
+	{
+	    $sql = "select * from fu_article where article_id = " . $id;
+	    $res = $this->db->query($sql);	
+	    return $res->row();
 	}
 }
