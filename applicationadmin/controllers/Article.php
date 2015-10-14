@@ -79,9 +79,75 @@ class Article extends CI_Controller {
 		}else {
 			$page = intval($page);
 		}
+		if($page > 1)
+		{
+		    $view['indexPage'] = 1;
+		    $view['prePage'] = $page - 1;
+		}
 		$totalPage = ceil($total/PAGESIZE);
+		if($page > $totalPage)
+		{
+		    $page = $totalPage;
+		}
+		if($page < $totalPage)
+		{
+		    $view['nextPage'] = $page + 1;
+		    $view['endPage'] = $totalPage;
+		}
+		$view['total'] = $total;
+		$view['page'] = $page;
 		$result = $this->Article_model->listArticle($page,PAGESIZE);
-		print_r($result);
+		$view['result'] = $result;
+        $view['totalPage'] = $totalPage;
+		$this->load->view('listArticle', $view);
 	}
+	
+	/**
+	 * 删除文章
+	 */
+	function listArticleDel()
+	{
+	   $id = $this->input->get_post('id'); 
+	   if(!$id)
+	   {
+	       echo '没有相关数据！';
+	       echo "&nbsp;<a href=\"javascript:history.go(-1);\">点击返回</a>";
+	       exit;
+	   }
+	   $id = intval($id);
+	   $res = $this->Article_model->listArticleDel($id);
+	   if($res)
+	   {
+	      $this->load->view('success'); 
+	   }else {
+	       $this->load->view('failure');
+	   }
+	}
+	
+	/**
+	 * 查看文章
+	 */
+	function listArticleDetails()
+	{
+	    $id = $this->input->get_post('id');
+	    if(!$id)
+	    {
+	        echo '没有相关数据！';
+	        echo "&nbsp;<a href=\"javascript:history.go(-1);\">点击返回</a>";
+	        exit;
+	    }	
+	    $id = intval($id);
+	    $res = $this->Article_model->listArticleDetails($id);
+	    if(!$res)
+	    {
+	        echo '没有相关数据！';
+	        echo "&nbsp;<a href=\"javascript:history.go(-1);\">点击返回</a>";
+	        exit;	      
+	    }
+	    $view['result'] = $res;
+	    
+	    $this->load->view('listArticleDetails',$view);
+	}
+	
 
 }
