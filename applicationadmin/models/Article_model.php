@@ -21,4 +21,25 @@ class Article_model extends CI_Model
 		$this->db->query($sql);	
 		 return $this->db->affected_rows();
 	}
+	
+	/**
+	 * @deprecated 文章列表
+	 * @param unknown $page
+	 * @param unknown $pageSize
+	 */
+	function listArticle($page,$pageSize)
+	{
+		$startNumber = ($page-1) * $pageSize;	
+		$sql = "select * from fu_article order by article_id desc limit " . $startNumber . ", " . $pageSize;
+	    $res = $this->db->query($sql);
+	    return $res->result_array();
+	}
+	
+	function listArticleTotal()
+	{
+		$sql = "select count(*) as total from fu_article";
+		$result = $this->db->query($sql);
+		$rowResult = $result->row();
+		return $rowResult->total;
+	}
 }
