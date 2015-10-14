@@ -336,34 +336,106 @@ class Room extends CI_Controller {
 	 */
 	function roomPosList()
 	{
-	    $view = array();
-	    $param = array();
-	    $roomList = $this->Room_model->roomPosList();
-	    $view['roomList'] = $roomList;
-	    // 房间号 
-	    $room_id = $this->input->get_post('roomId');
-	    $view['room_id'] = $room_id;
-	    if($room_id != 'all')
-	    {
-	        $param['location_room_id'] = $room_id;
-	    }
-	    // 牌位类型
-	    $positionType = $this->input->get_post('positionType');
-	    $view['type'] = $positionType;
-	    if($positionType != 'all')
-	    {
-	        
-	    }
-	    // 出售状态
-	    $status = $this->input->get_post('status');
-	    $view['status'] = $status;
-	    if($status != 'all')
-	    {
-	        
-	    }
-	    
+		$roomList = $this->Room_model->roomPosList();
+		$view['room_id'] = 'all';
+		$view['type'] = 'all';
+		$view['status'] = 'all';
+		$view['roomList'] = $roomList;
 	    $this->load->view('roomPosList',$view);
 	}
+	
+	/**
+	 * 根据查询条件筛选出的房间牌位信息
+	 */
+	function roomPosListSearch()
+	{
+		$view = array();
+		$param = array();
+		// 房间号
+		$room_id = $this->input->get_post('roomId');
+		if(!$room_id)
+		{
+			$param['location_room_id'] = 'all';
+			$view['room_id'] = 'all';
+		}else {
+			$param['location_room_id'] = $room_id;
+			$view['room_id'] = $room_id;
+		}
+	
+		// 牌位类型
+		$positionType = $this->input->get_post('positionType');
+		if(!$positionType)
+		{
+			$param['location_type'] = 'all';
+			$view['type'] = 'all';
+		}else {
+			$param['location_type'] = $positionType;
+			$view['type'] = $positionType;
+			if($positionType == 2)
+			{
+				$param['location_type'] = '0';
+			}
+		}
+	
+		// 出售状态
+		$status = $this->input->get_post('status');
+		if(!$status)
+		{
+			$view['status'] = 'all';
+			$param['location_number'] = 'all';
+		}else {
+			$view['status'] = $status;
+			$param['location_number'] = $status;
+			if($status == 3)
+			{
+				$param['location_number'] = '0';
+			}
+		}
+		// 房间列表
+		$roomList = $this->Room_model->roomPosList();
+		$view['roomList'] = $roomList;	
+		// 获取牌位总数目
+		$roomLocationTotal = $this->Room_model->roomLocationTotal($param);
+		if(!$roomLocationTotal)
+		{
+			echo '没有相关数据！';
+			echo "&nbsp;<a href=\"javascript:history.go(-1);\">点击返回</a>";
+			exit;
+		}
+		//页码
+		$page = $this->input->get_post('page');
+		if(!$page)
+		{
+			$page = 1;
+		}
+		// 总页码
+		$totalPage = ceil($roomLocationTotal/PAGESIZEPOS);
+		if($page > $totalPage)
+		{
+			$page = $totalPage;
+		}
+		
+		if($page > 1)
+		{
+			$view['indexPage'] = 1;
+			$view['prePage'] = $page - 1;
+		}
+		
+		if($page < $totalPage)
+		{
+			$view['endPage'] = $totalPage;
+			$view['nextPage'] = $page+1;
+		}
+		$param['page'] = $page;
+		$param['pageSize'] = PAGESIZEPOS;
+		$result = $this->Room_model->roomPosListSearch($param);
+		$view['page'] = $page;
+		$view['pageTotal'] = $totalPage;
+		$view['roomList'] = $roomList;
+		$view['result'] = $result;
+		$view['roomLocationTotal'] = $roomLocationTotal;
+		$this->load->view('roomPosListSearch',$view);
+	}	
 	
 	
 }
