@@ -231,5 +231,58 @@ class Room_model extends CI_Model
 	    return $res->result_array();
 	}
 	
+	/**
+	 * 
+	 * @param array $param 条件查询
+	 */
+	function roomLocationTotal($param)
+	{
+		$where = "";
+		foreach($param as $k=>$v)
+		{
+			if($v != 'all')
+			{
+				$where .= $k ."='" . $v ."' and ";
+			}
+		}
+		$sql = "select count(*) as total from fu_location_list";
+		if($where)
+		{
+			$where = " where " . substr($where,0,-4);
+			$sql .= $where;
+		}
+		$result = $this->db->query($sql);
+		$rowResult = $result->row();
+		return $rowResult->total;
+	}
+	
+	/**
+	 * @deprecated 根据查询相关数据
+	 * @param unknown $param
+	 */
+	function roomPosListSearch($param)
+	{
+		$where = "";
+		foreach($param as $k=>$v)
+		{
+			if($k == 'page' || $k == 'pageSize')
+			{
+				continue;
+			}
+			if($v != 'all')
+			{
+				$where .= $k . " = '" . $v ."' and ";
+			}
+		}
+		if($where)
+		{
+			$where = " where " . substr($where,0,-4);
+		}
+		$startNumber = ($param['page'] - 1) * $param['pageSize'];
+		$sql = "select * from fu_location_list " . $where . " limit " . $startNumber . ", " . $param['pageSize'];
+		$res = $this->db->query($sql);
+		return $res->result_array();		
+	}
+	
 	
 }
