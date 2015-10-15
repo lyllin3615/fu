@@ -33,9 +33,8 @@
 	<li>
 		<h2>会员管理中心</h2>
 		<ul>
-			<?php for($i=0; $i < 3; $i++) { ?>
-			<li><a href="">***********</a></li>
-			<?php } ?>
+			<li><a href="/Member/index" target="mainFrame">会员列表</a></li>
+			<li><a href="/Member/memberSearch" target="mainFrame">会员查询</a></li>
 		</ul>
 	</li>
 	
