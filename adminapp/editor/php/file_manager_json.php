@@ -16,10 +16,10 @@ $php_url = dirname($_SERVER['PHP_SELF']) . '/';
 //根目录路径，可以指定绝对路径，比如 /var/www/attached/
 // $root_path = $php_path . '../attached/';
 // $root_path = E:\wamp\www\fu\adminapp\editor\php/../attached/
-$root_path = realpath($php_path);
+//$root_path = realpath($php_path);
 // $root_path = E:\wamp\www\fu\adminapp\editor\php
 //根目录URL，可以指定绝对路径，比如 http://www.yoursite.com/attached/
-$root_url = $php_url . '../attached/';
+// $root_url = $php_url . '../attached/';
 //图片扩展名
 $ext_arr = array('gif', 'jpg', 'jpeg', 'png', 'bmp');
 
@@ -79,7 +79,7 @@ if (!file_exists($current_path) || !is_dir($current_path)) {
 }
 //$current_path = 'E:\wamp\www\fu\app\images\article/';
 //$current_path = 'G:\phpweb\apache2\htdocs\fu\app\images\article/';
-$current_path = realpath("../../../app/images/article/");
+$current_path = realpath("../../../app/images/article/") . '/';
 //$current_path = 'http://www.ci.com/images/article/';
 // echo $current_path; exit('-----');
 //遍历目录取得文件信息
