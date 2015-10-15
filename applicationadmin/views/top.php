@@ -15,6 +15,7 @@
 echo $username;
 ?>
 &nbsp;&nbsp;
-<a href="/Index/logout" target="_top">退出</a>
+<a href="/Index/logout" target="_top">退出</a>&nbsp;&nbsp;
+<a href="/Index/index" target="_top">返回首页</a>
 </body>
 </html>
